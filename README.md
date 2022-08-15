@@ -6,6 +6,7 @@ Dotnet-Project
  - ASP.Net core
  - swagger
  - EFCore
+ - Docker
  - <a href="https://www.google.com/url?sa=j&url=https%3A%2F%2Fgithub.com%2Fmicrosoftarchive%2Fredis%2Freleases%2Fdownload%2Fwin-3.0.504%2FRedis-x64-3.0.504.msi&uct=1651087369&usg=mBchHQ85uiOsVAJUELgvm09f-kk.&source=meet">Redis</a>
  - PostreSQL
  - js
