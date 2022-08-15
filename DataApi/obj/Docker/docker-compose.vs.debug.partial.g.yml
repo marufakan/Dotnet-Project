@@ -1,0 +1,85 @@
+version: '3.4'
+
+services:
+  bussinesapi:
+    image: bussinesapi:dev
+    container_name: BussinesApi
+    build:
+      target: base
+      labels:
+        com.microsoft.created-by: "visual-studio"
+        com.microsoft.visual-studio.project-name: "BussinesApi"
+    environment:
+      - DOTNET_USE_POLLING_FILE_WATCHER=1
+      - ASPNETCORE_LOGGING__CONSOLE__DISABLECOLORS=true
+      #- NUGET_FALLBACK_PACKAGES=$container_paths_to_fallback_packages_bussinesapi$
+    volumes:
+      - C:\Users\90553\source\repos\DataApi\BussinesApi:/app
+      - C:\Users\90553\source\repos\DataApi:/src
+      - C:\Users\90553\vsdbg\vs2017u5:/remote_debugger:rw
+#$nuget_volume_mapping_bussinesapi$
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+
+    entrypoint: tail -f /dev/null
+    labels:
+      com.microsoft.visualstudio.debuggee.program: "dotnet"
+      #com.microsoft.visualstudio.debuggee.arguments: " $debuggee_arguments_probing_paths_bussinesapi$ \"/app/bin/Debug/net5.0/BussinesApi.dll\""
+      com.microsoft.visualstudio.debuggee.workingdirectory: "/app"
+      com.microsoft.visualstudio.debuggee.killprogram: "/bin/sh -c \"if PID=$$(pidof dotnet); then kill $$PID; fi\""
+    tty: true
+  currencywebsite:
+    image: currencywebsite:dev
+    container_name: CurrencyWebSite
+    build:
+      target: base
+      labels:
+        com.microsoft.created-by: "visual-studio"
+        com.microsoft.visual-studio.project-name: "CurrencyWebSite"
+    environment:
+      - DOTNET_USE_POLLING_FILE_WATCHER=1
+      - ASPNETCORE_LOGGING__CONSOLE__DISABLECOLORS=true
+      #- NUGET_FALLBACK_PACKAGES=$container_paths_to_fallback_packages_currencywebsite$
+    volumes:
+      - C:\Users\90553\source\repos\DataApi\CurrencyWebSite:/app
+      - C:\Users\90553\source\repos\DataApi:/src
+      - C:\Users\90553\vsdbg\vs2017u5:/remote_debugger:rw
+#$nuget_volume_mapping_currencywebsite$
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+
+    entrypoint: tail -f /dev/null
+    labels:
+      com.microsoft.visualstudio.debuggee.program: "dotnet"
+      #com.microsoft.visualstudio.debuggee.arguments: " $debuggee_arguments_probing_paths_currencywebsite$ \"/app/bin/Debug/net5.0/CurrencyWebSite.dll\""
+      com.microsoft.visualstudio.debuggee.workingdirectory: "/app"
+      com.microsoft.visualstudio.debuggee.killprogram: "/bin/sh -c \"if PID=$$(pidof dotnet); then kill $$PID; fi\""
+    tty: true
+
+  dataapi:
+    image: dataapi:dev
+    container_name: DataApi
+    build:
+      target: base
+      labels:
+        com.microsoft.created-by: "visual-studio"
+        com.microsoft.visual-studio.project-name: "DataApi"
+    environment:
+      - DOTNET_USE_POLLING_FILE_WATCHER=1
+      - ASPNETCORE_LOGGING__CONSOLE__DISABLECOLORS=true
+      #- NUGET_FALLBACK_PACKAGES=$container_paths_to_fallback_packages_dataapi$
+    volumes:
+      - C:\Users\90553\source\repos\DataApi\DataApi:/app
+      - C:\Users\90553\source\repos\DataApi:/src
+      - C:\Users\90553\vsdbg\vs2017u5:/remote_debugger:rw
+#$nuget_volume_mapping_dataapi$
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+
+    entrypoint: tail -f /dev/null
+    labels:
+      com.microsoft.visualstudio.debuggee.program: "dotnet"
+      #com.microsoft.visualstudio.debuggee.arguments: " $debuggee_arguments_probing_paths_dataapi$ \"/app/bin/Debug/net5.0/DataApi.dll\""
+      com.microsoft.visualstudio.debuggee.workingdirectory: "/app"
+      com.microsoft.visualstudio.debuggee.killprogram: "/bin/sh -c \"if PID=$$(pidof dotnet); then kill $$PID; fi\""
+    tty: true

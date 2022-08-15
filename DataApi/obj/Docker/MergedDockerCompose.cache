@@ -1,0 +1,74 @@
+services:
+  bussinesapi:
+    build:
+      context: C:\Users\90553\source\repos\DataApi
+      dockerfile: BussinesApi/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: https://+:443;http://+:80
+    image: bussinesapi
+    ports:
+    - published: 1236
+      target: 80
+    - target: 80
+    - target: 443
+    volumes:
+    - C:\Users\90553\AppData\Roaming\ASP.NET\Https:/root/.aspnet/https:ro
+  currencywebsite:
+    build:
+      context: C:\Users\90553\source\repos\DataApi
+      dockerfile: CurrencyWebSite/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: https://+:443;http://+:80
+    image: currencywebsite
+    ports:
+    - published: 1235
+      target: 80
+    - target: 80
+    - target: 443
+    volumes:
+    - C:\Users\90553\AppData\Roaming\ASP.NET\Https:/root/.aspnet/https:ro
+  dataapi:
+    build:
+      context: C:\Users\90553\source\repos\DataApi
+      dockerfile: DataApi/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: https://+:443;http://+:80
+    image: dataapi
+    ports:
+    - published: 1234
+      target: 80
+    - target: 80
+    - target: 443
+    volumes:
+    - C:\Users\90553\AppData\Roaming\ASP.NET\Https:/root/.aspnet/https:ro
+  db:
+    container_name: postgresql
+    environment:
+      POSTGRES_DB: mydb
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+    image: postgres:latest
+    ports:
+    - published: 5432
+      target: 5432
+    restart: always
+    volumes:
+    - db:/var/lib/postgresql/data:rw
+  redis:
+    command:
+    - redis-server
+    container_name: redis
+    image: redis:latest
+    ports:
+    - published: 6379
+      target: 80
+    volumes:
+    - /appdata/redis/data:/data:rw
+    - C:\Users\90553\source\repos\DataApi\redis.conf:/usr/local/etc/redis/redis.conf:rw
+version: '3.4'
+volumes:
+  db:
+    driver: local

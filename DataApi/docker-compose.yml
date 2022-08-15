@@ -1,0 +1,59 @@
+version: '3.4'
+
+services:
+  bussinesapi:
+    image: ${DOCKER_REGISTRY-}bussinesapi
+    build:
+      context: .
+      dockerfile: BussinesApi/Dockerfile
+    ports:
+    - '1236:80'
+
+  currencywebsite:
+    image: ${DOCKER_REGISTRY-}currencywebsite
+    build:
+      context: .
+      dockerfile: CurrencyWebSite/Dockerfile
+    ports:
+    - '1235:80'
+
+
+  dataapi:
+    image: ${DOCKER_REGISTRY-}dataapi
+    build:
+      context: .
+      dockerfile: DataApi/Dockerfile
+    ports:
+    - '1234:80'
+
+# REDIS 
+  redis:
+    container_name: redis
+    image: redis:latest
+    #restart: always
+    command: 
+    - redis-server
+    #environment:
+    #- REDIS_DISABLE_COMMANDS=FLUSHDB,FLUSHALL
+    ports:
+    - "6379:80"
+    volumes:
+    - ./redis.conf:/usr/local/etc/redis/redis.conf
+    - $DOCKERDIR/appdata/redis/data:/data
+
+ #POSTGRESQL
+  db:
+    container_name: postgresql
+    image: postgres:latest
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=mydb
+    ports:
+      - '5432:5432'
+    volumes: 
+      - db:/var/lib/postgresql/data
+volumes:
+  db:
+    driver: local

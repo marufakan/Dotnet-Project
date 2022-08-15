@@ -1,0 +1,15 @@
+{
+  "profiles": {
+    "test": {
+      "commandName": "DockerCompose",
+      "serviceActions": {
+        "bussinesapi": "StartDebugging",
+        "currencywebsite": "StartDebugging",
+        "dataapi": "StartDebugging",
+        "db": "StartWithoutDebugging",
+        "redis": "StartWithoutDebugging"
+      },
+      "commandVersion": "1.0"
+    }
+  }
+}

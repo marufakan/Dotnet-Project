@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "RemMjnVOT6kj8kBwCW+BWSxkSe9QqMhVDnDqyZKtrr3C+aDIDqbwc1JvCBHgjIv3JnI8loC+7vEpGYcaCllZsw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\90553\\source\\repos\\DataApi\\CurrencyWebSite\\CurrencyWebSite.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\90553\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.11.1\\microsoft.visualstudio.azure.containers.tools.targets.1.11.1.nupkg.sha512",
+    "C:\\Users\\90553\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\5.0.14\\microsoft.netcore.app.host.win-x64.5.0.14.nupkg.sha512"
+  ],
+  "logs": []
+}

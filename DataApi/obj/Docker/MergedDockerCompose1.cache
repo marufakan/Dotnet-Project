@@ -1,0 +1,137 @@
+services:
+  bussinesapi:
+    build:
+      context: C:\Users\90553\source\repos\DataApi
+      dockerfile: BussinesApi/Dockerfile
+      labels:
+        com.microsoft.created-by: visual-studio
+        com.microsoft.visual-studio.project-name: BussinesApi
+      target: base
+    container_name: BussinesApi
+    entrypoint: tail -f /dev/null
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_LOGGING__CONSOLE__DISABLECOLORS: "true"
+      ASPNETCORE_URLS: https://+:443;http://+:80
+      DOTNET_USE_POLLING_FILE_WATCHER: '1'
+      NUGET_FALLBACK_PACKAGES: ''
+    image: bussinesapi:dev
+    labels:
+      com.microsoft.visualstudio.debuggee.arguments: ' --additionalProbingPath /root/.nuget/packages  "/app/bin/Debug/net5.0/BussinesApi.dll"'
+      com.microsoft.visualstudio.debuggee.killprogram: /bin/sh -c "if PID=$$(pidof
+        dotnet); then kill $$PID; fi"
+      com.microsoft.visualstudio.debuggee.program: dotnet
+      com.microsoft.visualstudio.debuggee.workingdirectory: /app
+    ports:
+    - published: 1236
+      target: 80
+    - target: 80
+    - target: 443
+    tty: true
+    volumes:
+    - C:\Users\90553\source\repos\DataApi\BussinesApi:/app:rw
+    - C:\Users\90553\vsdbg\vs2017u5:/remote_debugger:rw
+    - C:\Users\90553\AppData\Roaming\ASP.NET\Https:/root/.aspnet/https:ro
+    - C:\Users\90553\AppData\Roaming\Microsoft\UserSecrets:/root/.microsoft/usersecrets:ro
+    - C:\Users\90553\.nuget\packages:/root/.nuget/packages:ro
+    - C:\Users\90553\source\repos\DataApi:/src:rw
+  currencywebsite:
+    build:
+      context: C:\Users\90553\source\repos\DataApi
+      dockerfile: CurrencyWebSite/Dockerfile
+      labels:
+        com.microsoft.created-by: visual-studio
+        com.microsoft.visual-studio.project-name: CurrencyWebSite
+      target: base
+    container_name: CurrencyWebSite
+    entrypoint: tail -f /dev/null
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_LOGGING__CONSOLE__DISABLECOLORS: "true"
+      ASPNETCORE_URLS: https://+:443;http://+:80
+      DOTNET_USE_POLLING_FILE_WATCHER: '1'
+      NUGET_FALLBACK_PACKAGES: ''
+    image: currencywebsite:dev
+    labels:
+      com.microsoft.visualstudio.debuggee.arguments: ' --additionalProbingPath /root/.nuget/packages  "/app/bin/Debug/net5.0/CurrencyWebSite.dll"'
+      com.microsoft.visualstudio.debuggee.killprogram: /bin/sh -c "if PID=$$(pidof
+        dotnet); then kill $$PID; fi"
+      com.microsoft.visualstudio.debuggee.program: dotnet
+      com.microsoft.visualstudio.debuggee.workingdirectory: /app
+    ports:
+    - published: 1235
+      target: 80
+    - target: 80
+    - target: 443
+    tty: true
+    volumes:
+    - C:\Users\90553\source\repos\DataApi\CurrencyWebSite:/app:rw
+    - C:\Users\90553\vsdbg\vs2017u5:/remote_debugger:rw
+    - C:\Users\90553\AppData\Roaming\ASP.NET\Https:/root/.aspnet/https:ro
+    - C:\Users\90553\AppData\Roaming\Microsoft\UserSecrets:/root/.microsoft/usersecrets:ro
+    - C:\Users\90553\.nuget\packages:/root/.nuget/packages:ro
+    - C:\Users\90553\source\repos\DataApi:/src:rw
+  dataapi:
+    build:
+      context: C:\Users\90553\source\repos\DataApi
+      dockerfile: DataApi/Dockerfile
+      labels:
+        com.microsoft.created-by: visual-studio
+        com.microsoft.visual-studio.project-name: DataApi
+      target: base
+    container_name: DataApi
+    entrypoint: tail -f /dev/null
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_LOGGING__CONSOLE__DISABLECOLORS: "true"
+      ASPNETCORE_URLS: https://+:443;http://+:80
+      DOTNET_USE_POLLING_FILE_WATCHER: '1'
+      NUGET_FALLBACK_PACKAGES: ''
+    image: dataapi:dev
+    labels:
+      com.microsoft.visualstudio.debuggee.arguments: ' --additionalProbingPath /root/.nuget/packages  "/app/bin/Debug/net5.0/DataApi.dll"'
+      com.microsoft.visualstudio.debuggee.killprogram: /bin/sh -c "if PID=$$(pidof
+        dotnet); then kill $$PID; fi"
+      com.microsoft.visualstudio.debuggee.program: dotnet
+      com.microsoft.visualstudio.debuggee.workingdirectory: /app
+    ports:
+    - published: 1234
+      target: 80
+    - target: 80
+    - target: 443
+    tty: true
+    volumes:
+    - C:\Users\90553\source\repos\DataApi\DataApi:/app:rw
+    - C:\Users\90553\vsdbg\vs2017u5:/remote_debugger:rw
+    - C:\Users\90553\AppData\Roaming\ASP.NET\Https:/root/.aspnet/https:ro
+    - C:\Users\90553\AppData\Roaming\Microsoft\UserSecrets:/root/.microsoft/usersecrets:ro
+    - C:\Users\90553\.nuget\packages:/root/.nuget/packages:ro
+    - C:\Users\90553\source\repos\DataApi:/src:rw
+  db:
+    container_name: postgresql
+    environment:
+      POSTGRES_DB: mydb
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+    image: postgres:latest
+    ports:
+    - published: 5432
+      target: 5432
+    restart: always
+    volumes:
+    - db:/var/lib/postgresql/data:rw
+  redis:
+    command:
+    - redis-server
+    container_name: redis
+    image: redis:latest
+    ports:
+    - published: 6379
+      target: 80
+    volumes:
+    - /appdata/redis/data:/data:rw
+    - C:\Users\90553\source\repos\DataApi\redis.conf:/usr/local/etc/redis/redis.conf:rw
+version: '3.4'
+volumes:
+  db:
+    driver: local
